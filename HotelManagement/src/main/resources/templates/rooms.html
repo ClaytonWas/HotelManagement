@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Rooms</h1>
+    <ul>
+        <li th:each="room : ${rooms}">
+            <span th:text="${room.number}"></span>
+            <span th:text="${room.type}"></span>
+        </li>
+    </ul>
+    <form action="/addRoom" method="post">
+        <input type="text" name="number" placeholder="Room Number">
+        <input type="text" name="type" placeholder="Room Type">
+        <button type="submit">Add Room</button>
+    </form>
+    <a href="/customers">View Customers</a>
+    <a href="/bookings">View Bookings</a>
+    <a href="/services">View Services</a>
+</body>
+</html>

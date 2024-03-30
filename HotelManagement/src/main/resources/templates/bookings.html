@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Bookings</h1>
+    <ul>
+        <li th:each="booking : ${bookings}">
+            <span th:text="${booking.customer.name}"></span>
+            <span th:text="${booking.room.number}"></span>
+            <span th:text="${booking.startDate}"></span>
+            <span th:text="${booking.endDate}"></span>
+        </li>
+    </ul>
+    <form action="/addBooking" method="post">
+        <input type="text" name="name" placeholder="Service Name">
+        <input type="number" name="roomNumber" placeholder="Room Number">
+        <input type="date" name="startDate" placeholder="Start Date">
+        <input type="date" name="endDate" placeholder="End Date">
+        <button type="submit">Add Booking</button>
+    </form>
+    <a href="/customers">View Customers</a>
+    <a href="/rooms">View Rooms</a>
+    <a href="/services">View Services</a>
+</body>
+</html>
