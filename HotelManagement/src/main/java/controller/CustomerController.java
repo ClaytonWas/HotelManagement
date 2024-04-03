@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.anudip.Hotelmanagement.entity.Customer;
-import com.anudip.Hotelmanagement.service.CustomerService;
+
+import model.Customer;
+import service.CustomerService;
+
 
 @RestController
 @RequestMapping("/user")
@@ -23,7 +25,7 @@ public class CustomerController {
 	
 	@GetMapping("/all-users")
 	public List<Customer> allCustomers() {
-		return customerService.getAllCustomer();
+		return customerService.getAllCustomers();
 	}
 	
 	@GetMapping("/{id}")
