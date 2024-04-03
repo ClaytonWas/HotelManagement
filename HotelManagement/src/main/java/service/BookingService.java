@@ -4,9 +4,9 @@ import java.util.List;
 import model.Booking;
 
 	public interface BookingService {
-		Booking saveOrder(Booking order);
-		Booking updateOrder(Long bookingId, Booking order);
-		Booking getOrder(Long bookingId);
-		List<Booking> getAllOrder();
-		Boolean deleteOrder(Long bookingId);
+		Booking saveBooking(Booking booking);
+		Booking updateBooking(Long bookingId, Booking booking);
+		Booking getBooking(Long bookingId);
+		List<Booking> getAllBookings();
+		Boolean deleteBooking(Long bookingId);
 	}
