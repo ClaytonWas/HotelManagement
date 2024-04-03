@@ -16,7 +16,8 @@
     </ul>
     <form action="/addCustomer" method="post">
         <input type="text" name="name" placeholder="Name">
-        <input type="email" name="email" placeholder="Email">
+        <input type="tel" name="phoneNumber" placeholder = "Ex: 647-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <input type="email" name="email" placeholder="Ex: john.smith@gmail.com">
         <button type="submit">Add Customer</button>
     </form>
     <a href="/rooms">View Rooms</a>
