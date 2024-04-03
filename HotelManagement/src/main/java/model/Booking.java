@@ -1,5 +1,8 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.Set;
+
 //The git file had it labeled in a file called entity might cause problems later 
 
 
@@ -7,18 +10,33 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "booking_details")
+@Table(name = "BOOKING")
 public class Booking {
 	
 	@Id
-	@Column(name = "booking_id")
+	@Column(name = "Booking_ID")
 	private Long bookingId;
 	@Column(name="guest_name")
 	private String guestName;
+	
+	@Column(name = "customer_ID")
+	private long customerId;
+	
+	@Column(name = "room_ID")
+	private long roomId;
+	
+	@Column(name = "start_date")
+	private LocalDate startDate;
+	
+	@Column(name = "end_date")
+	private LocalDate endDate;
 	
 	// Guest have to provide their Identification Details (eg - Aadhar, Driving licence, PAN card, etc)
 	@Column(name = "id_proof")
@@ -34,13 +52,80 @@ public class Booking {
 	@Column(name="room_price")
 	private int price;
 	
-	@OneToOne
-	@JoinColumn(name = "customer_id")
+	@ManyToOne
+	@JoinColumn(name = "customer")
 	private Customer customer;
 	
-	@OneToOne
-	@JoinColumn(name = "hotel_id")
-	private Hotel hotel;
+	@ManyToOne
+	@JoinColumn(name = "room")
+	private Room room;
+	
+	@ManyToMany
+	@JoinTable(name = "services_in_booking",
+			joinColumns = {
+					@JoinColumn(name = "Booking_Id", referencedColumnName = "Booking_ID",
+							nullable = false, updatable = false)},
+			inverseJoinColumns = {
+					@JoinColumn(name = "ProvidedService_Id", referencedColumnName = "ProvidedService_ID",
+							nullable = false, updatable = false)})
+	private Set<ProvidedService> providedServices;
+	
+	public Booking() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Booking(Long bookingId, String guestName, long customerId, long roomId, LocalDate startDate,
+			LocalDate endDate, String guestIdProof, String address, long contact, int price, Customer customer,
+			Room room, Set<ProvidedService> providedServices) {
+		super();
+		this.bookingId = bookingId;
+		this.guestName = guestName;
+		this.customerId = customerId;
+		this.roomId = roomId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.guestIdProof = guestIdProof;
+		this.address = address;
+		this.contact = contact;
+		this.price = price;
+		this.customer = customer;
+		this.room = room;
+		this.providedServices = providedServices;
+	}
+
+
+	public long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
+	}
+
+	public long getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(long roomId) {
+		this.roomId = roomId;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
 
 	public Long getBookingId() {
 		return bookingId;
@@ -97,13 +182,34 @@ public class Booking {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-	public Hotel getHotel() {
-		return hotel;
+	
+	
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
+	
+	
+
+	public Set<ProvidedService> getProvidedServices() {
+		return providedServices;
+	}
+
+
+	public void setProvidedServices(Set<ProvidedService> providedServices) {
+		this.providedServices = providedServices;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Booking [guestName=" + guestName + ", guestIdProof=" + guestIdProof + ", address=" + address
+				+ ", contact=" + contact + ", price=" + price + ", customer=" + customer + "]";
+	}
+
 
 }
