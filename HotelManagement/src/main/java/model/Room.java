@@ -19,7 +19,7 @@ public class Room {
 	private long roomId;
 	
 	@Column(name = "room_number")
-	private Integer roomNumber;
+	private String roomNumber;
 	
 	@Column(name = "room_type")
 	private String type;
@@ -36,7 +36,7 @@ public class Room {
 	}
 
 	
-	public Room(long roomId, Integer roomNumber, String type, double price,
+	public Room(long roomId, String roomNumber, String type, double price,
 			HashMap<LocalDate, Booking> bookings) {
 		super();
 		this.roomId = roomId;
@@ -55,11 +55,11 @@ public class Room {
 		this.roomId = roomId;
 	}
 
-	public Integer getRoomNumber() {
+	public String getRoomNumber() {
 		return roomNumber;
 	}
 
-	public void setRoomNumber(Integer roomNumber) {
+	public void setRoomNumber(String roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 

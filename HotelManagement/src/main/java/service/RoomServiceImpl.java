@@ -11,12 +11,16 @@ import repository.RoomRepository;
 public class RoomServiceImpl implements RoomService{
 	RoomRepository roomRepo;
 	
-	public Room addRoom(Room room) {
+	public void addRoom(Room room) {
 		if(!roomRepo.existsByRoomNumberAndType(room.getRoomNumber(), room.getType())) {
 			roomRepo.save(room);
+			
+			System.out.println(room);
 		}
 		
-		return room;
+		System.out.println("Failure to register room");
+		
+		//return room;
 	}
 	
 	public Boolean removeRoom(Long roomId) {
