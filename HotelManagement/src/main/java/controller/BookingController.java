@@ -20,33 +20,33 @@ import service.BookingService;
 @RequestMapping("/order")
 public class BookingController {
 	@Autowired
-	private BookingService bookingSerice;
+	private BookingService bookingService;
 	
 	@GetMapping("/all-booking")
 	public List<Booking> allOrders() {
-		return bookingSerice.getAllBookings();
+		return bookingService.getAllBookings();
 	}
 
 	@PostMapping("/book")
 	public ResponseEntity<?> saveOrder(@RequestBody() Booking order) {
-		Booking dborder = bookingSerice.saveBooking(order);
+		Booking dborder = bookingService.saveBooking(order);
 		return ResponseEntity.ok().body(dborder);
 	}
 
 	@GetMapping("/booking/{id}")
 	public Booking getData(@PathVariable("id") Long id) {
-		return bookingSerice.getBooking(id);
+		return bookingService.getBooking(id);
 	}
 
 	@PutMapping("/bookingupdate")
 	public Booking updatedata(@PathVariable("id") Long id, @RequestBody() Booking order) {
-		return bookingSerice.updateBooking(id, order);
+		return bookingService.updateBooking(id, order);
 	}
 
 	@DeleteMapping("/deletebooking/{id}")
 	public String deletedate(@PathVariable("id") Long id) {
-		Booking data = bookingSerice.getBooking(id);
-		Boolean test = bookingSerice.deleteBooking(id);
+		Booking data = bookingService.getBooking(id);
+		Boolean test = bookingService.deleteBooking(id);
 		return (data != null) ? (test) ? "deleted sucess" : "no id found" : "no data found";
 	}
 }

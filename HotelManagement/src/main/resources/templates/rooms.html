@@ -14,9 +14,10 @@
             <span th:text="${room.type}"></span>
         </li>
     </ul>
-    <form action="/addRoom" method="post">
-        <input type="text" name="number" placeholder="Room Number">
-        <input type="text" name="type" placeholder="Room Type">
+    <form th:action="@{/processAddRoom}" method="post" th:object="${Room}">
+        <input type="text" name="number" th:field="@{roomNumber}"placeholder="Room Number">
+        <input type="number" min="0.00" step="0.01" name="price" th:field="@{price}" placeholder="$299.99">
+        <input type="text" name="type" th:field="@{type}" placeholder="Room Type">
         <button type="submit">Add Room</button>
     </form>
     <a href="/customers">View Customers</a>

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface RoomRepository extends JpaRepository<Room, Long> {
     // You can add custom methods here if needed
 	
-	boolean existsByRoomNumberAndType(Integer roomNumber, String type);
+	boolean existsByRoomNumberAndType(String roomNumber, String type);
 	
 	@Query("select r from Room r WHERE r.roomId = ?1")
 	Room findByRoomId(Long roomId);
