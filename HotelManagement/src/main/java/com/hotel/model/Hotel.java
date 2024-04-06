@@ -1,4 +1,5 @@
-package model;
+/*
+package com.hotel.model;
 
 // The git file had it labeled in a file called entity might cause problems later 
 
@@ -69,3 +70,4 @@ public class Hotel {
 	}
 	
 }
+*/

@@ -1,12 +1,12 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import model.Customer;
-import repository.CustomerRepository;
+import com.hotel.model.Customer;
+import com.hotel.repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -18,12 +18,14 @@ public class CustomerServiceImpl implements CustomerService{
 		this.customerRepo = customerRepo;
 	}
 
-	public Customer addCustomer(Customer customer) {
+	public void addCustomer(Customer customer) {
 		if(!customerRepo.existsByNameAndPhoneNumber(customer.getName(), customer.getPhoneNumber())) {
 			customerRepo.save(customer);
+			
+			System.out.println(customer);
+		}else {
+			System.out.println("Failure to save customer");
 		}
-		
-		return customer;
 	}
 	
 	public Boolean removeCustomer(Long customerId){
@@ -41,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService{
 		
 	}
 	
-	public Customer updateCustomer(Long customerId, Customer customer){
+	public void updateCustomer(Long customerId, Customer customer){
 		
 		if(customerRepo.existsById(customerId)){
 			Customer customerTU = getCustomer(customerId);
@@ -52,10 +54,10 @@ public class CustomerServiceImpl implements CustomerService{
 			
 			customerRepo.save(customerTU);
 			
-			return customerTU;
+			System.out.println("Customer successfully updated");
 		}
 		
-		return customer;
+		System.out.println("Failure to update customer");
 	}
 	
 	public List<Customer> getAllCustomers(){

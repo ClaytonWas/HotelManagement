@@ -1,4 +1,4 @@
-package model;
+package com.hotel.model;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -8,6 +8,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -21,6 +22,7 @@ import jakarta.persistence.Table;
 public class Booking {
 	
 	@Id
+	@GeneratedValue
 	@Column(name = "Booking_ID")
 	private Long bookingId;
 	@Column(name="guest_name")
@@ -64,17 +66,26 @@ public class Booking {
 	@JoinTable(name = "services_in_booking",
 			joinColumns = {
 					@JoinColumn(name = "Booking_Id", referencedColumnName = "Booking_ID",
-							nullable = false, updatable = false)},
+							nullable = false, updatable = false, insertable = false)},
 			inverseJoinColumns = {
 					@JoinColumn(name = "ProvidedService_Id", referencedColumnName = "ProvidedService_ID",
-							nullable = false, updatable = false)})
+							nullable = false, updatable = false, insertable = false)})
 	private Set<ProvidedService> providedServices;
 	
 	public Booking() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+		
+	public Booking(Long bookingId, long customerId, long roomId, LocalDate startDate, LocalDate endDate) {
+		super();
+		this.bookingId = bookingId;
+		this.customerId = customerId;
+		this.roomId = roomId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
 	public Booking(Long bookingId, String guestName, long customerId, long roomId, LocalDate startDate,
 			LocalDate endDate, String guestIdProof, String address, long contact, int price, Customer customer,
 			Room room, Set<ProvidedService> providedServices) {
@@ -204,12 +215,10 @@ public class Booking {
 		this.providedServices = providedServices;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Booking [guestName=" + guestName + ", guestIdProof=" + guestIdProof + ", address=" + address
-				+ ", contact=" + contact + ", price=" + price + ", customer=" + customer + "]";
+		return "Booking [bookingId=" + bookingId + ", roomId=" + roomId + ", startDate=" + startDate + ", endDate="
+				+ endDate + "]";
 	}
-
 
 }

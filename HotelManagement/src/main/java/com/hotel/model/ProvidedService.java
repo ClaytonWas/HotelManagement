@@ -1,9 +1,10 @@
-package model;
+package com.hotel.model;
 
 import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -13,6 +14,7 @@ import jakarta.persistence.Table;
 public class ProvidedService {
 	
 	@Id
+	@GeneratedValue
 	@Column(name = "ProvidedService_ID")
 	private long providedServiceId;
 	

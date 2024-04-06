@@ -1,8 +1,10 @@
-package controller;
+package com.hotel.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,16 +14,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.Booking;
-import service.BookingService;
+import com.hotel.model.Booking;
+import com.hotel.service.BookingService;
 
 
-@RestController
-@RequestMapping("/order")
+@Controller
+//@RequestMapping("/order")
 public class BookingController {
-	@Autowired
 	private BookingService bookingService;
 	
+	public BookingController(BookingService bookingService) {
+		super();
+		this.bookingService = bookingService;
+	}
+	
+	@GetMapping("/addBooking")
+	public String addBooking(Model model) {
+		
+		model.addAttribute("booking", new Booking());
+		
+		
+		return "bookings";	
+	}
+	
+	@PostMapping("/processAddBooking")
+	public String processAddBooking(Booking booking, Model model) {
+		
+		bookingService.saveBooking(booking);
+		
+		return "redirect:/addBooking";
+	}
+	
+	/*
 	@GetMapping("/all-booking")
 	public List<Booking> allOrders() {
 		return bookingService.getAllBookings();
@@ -49,4 +73,5 @@ public class BookingController {
 		Boolean test = bookingService.deleteBooking(id);
 		return (data != null) ? (test) ? "deleted sucess" : "no id found" : "no data found";
 	}
+	*/
 }

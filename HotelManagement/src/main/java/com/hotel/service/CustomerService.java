@@ -1,12 +1,13 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
-import model.Customer;
+
+import com.hotel.model.Customer;
 
 public interface CustomerService {
-	Customer addCustomer(Customer customer);
+	void addCustomer(Customer customer);
 	Boolean removeCustomer(Long customerId);
-	Customer updateCustomer(Long customerId, Customer customer);
+	void updateCustomer(Long customerId, Customer customer);
 	List<Customer> getAllCustomers();
 	Customer getCustomer(Long customerId);
 }

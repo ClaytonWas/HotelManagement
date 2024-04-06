@@ -1,15 +1,16 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
 
-import model.ProvidedService;
+import com.hotel.model.ProvidedService;
 
 public interface ProvidedServiceService {
-	ProvidedService saveService(ProvidedService service);
+	void saveService(ProvidedService service);
 	Boolean removeService(Long providedServiceId);
-	ProvidedService updateService(Long providedServiceId,ProvidedService service);
+	void updateService(Long providedServiceId,ProvidedService service);
 	List<ProvidedService> getAllServices();
 	ProvidedService getService(Long providedServiceId);
 	
 
 }
+

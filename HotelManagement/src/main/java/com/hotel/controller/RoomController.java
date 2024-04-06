@@ -1,4 +1,4 @@
-package controller;
+package com.hotel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,22 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-import model.Room;
-import service.RoomService;
+import com.hotel.model.Room;
+import com.hotel.service.RoomService;
 
 @Controller
 public class RoomController {
 	RoomService roomService;
 	
-	@Autowired
 	public RoomController(RoomService roomService) {
 		super();
 		this.roomService = roomService;
 	}
 	
 	@GetMapping("/addRoom")
-	public String addRoom() {
+	public String addRoom(Model model) {
+		model.addAttribute("room", new Room());
+		
 		return "rooms";
 	}
 	
@@ -30,9 +30,8 @@ public class RoomController {
 		
 		roomService.addRoom(room);
 		
-		System.out.println(room);
-		
 		return "redirect:/addRoom";
 	}
 	
 }
+

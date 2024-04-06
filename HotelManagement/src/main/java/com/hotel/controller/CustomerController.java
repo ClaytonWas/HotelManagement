@@ -1,9 +1,11 @@
-package controller;
+package com.hotel.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,16 +15,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.Customer;
-import service.CustomerService;
+import com.hotel.model.Customer;
+import com.hotel.service.CustomerService;
 
 
-@RestController
-@RequestMapping("/user")
+@Controller
+//@RequestMapping("/user")
 public class CustomerController {
-	@Autowired
 	private CustomerService customerService;
 	
+	public CustomerController(CustomerService customerService) {
+		super();
+		this.customerService = customerService;
+	}
+	
+	@GetMapping("/addCustomer")
+	public String addController(Model model) {
+		
+		model.addAttribute("customer", new Customer());
+		
+		return "customers";
+	}
+	
+	@PostMapping("/processAddCustomer")
+	public String processAddCustomer(Customer customer, Model model) {
+		
+		customerService.addCustomer(customer);
+		
+		return "redirect:/addCustomer";
+	}
+	
+
+	/*
 	@GetMapping("/all-users")
 	public List<Customer> allCustomers() {
 		return customerService.getAllCustomers();
@@ -50,4 +74,5 @@ public class CustomerController {
 		Boolean test = customerService.removeCustomer(id);
 		return (data != null) ? (test) ? "deleted successfully" : "no id found" : "no data found";
 	}
+	*/
 }

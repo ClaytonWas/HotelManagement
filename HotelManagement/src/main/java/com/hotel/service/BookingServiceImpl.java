@@ -1,12 +1,19 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
 
-import model.Booking;
-import repository.BookingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Service;
 
+import com.hotel.model.Booking;
+
+import com.hotel.repository.BookingRepository;
+
+@Service
 public class BookingServiceImpl implements BookingService{
-	
+
+	@Autowired
 	BookingRepository bookingRepo;
 	
 	public BookingServiceImpl(BookingRepository bookingRepo) {
@@ -14,13 +21,17 @@ public class BookingServiceImpl implements BookingService{
 		this.bookingRepo = bookingRepo;
 	}
 
-	public Booking saveBooking(Booking booking) {
+	public void saveBooking(Booking booking) {
 		
 		if (!bookingRepo.existsByStartDateAndRoomId(booking.getStartDate(), booking.getRoomId())) {
 			bookingRepo.save(booking);
+			
+			System.out.println(booking);
+		}
+		else {
+			System.out.println("Failure to save booking");
 		}
 		
-		return booking;
 	}
 	
 	public Boolean deleteBooking(Long bookId) {
@@ -37,7 +48,7 @@ public class BookingServiceImpl implements BookingService{
 		return bookingRepo.findByBookingId(bookingId);
 	}
 	
-	public Booking updateBooking(Long bookingId, Booking booking) {
+	public void updateBooking(Long bookingId, Booking booking) {
 		
 		if (bookingRepo.existsById(bookingId)) {
 			
@@ -50,10 +61,10 @@ public class BookingServiceImpl implements BookingService{
 			
 			bookingRepo.save(bookingTU);
 			
-			return bookingTU;
+			System.out.println("Booking successfully updated");
 		}
 		
-		return booking;
+		System.out.println("Failure to update booking");
 	}
 	
 	public List<Booking> getAllBookings(){
@@ -62,3 +73,4 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 }
+

@@ -8,18 +8,23 @@
 </head>
 <body>
     <h1>Customers</h1>
+    
+<!--  
     <ul>
         <li th:each="customer : ${customers}">
             <span th:text="${customer.name}"></span>
             <span th:text="${customer.email}"></span>
         </li>
     </ul>
-    <form action="/addCustomer" method="post">
-        <input type="text" name="name" placeholder="Name">
-        <input type="tel" name="phoneNumber" placeholder = "Ex: 647-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-        <input type="email" name="email" placeholder="Ex: john.smith@gmail.com">
+-->
+	
+    <form th:action="@{/processAddCustomer}" method="post" th:object="${customer}">
+        <input type="text" name="name"  th:field="*{name}" placeholder="Name">
+        <input type="tel" name="phoneNumber" th:field="*{phoneNumber}" placeholder = "Ex: 647-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <input type="email" name="email" th:field="*{email}" placeholder="Ex: john.smith@gmail.com">
         <button type="submit">Add Customer</button>
     </form>
+    
     <a href="/rooms">View Rooms</a>
     <a href="/bookings">View Bookings</a>
     <a href="/services">View Services</a>

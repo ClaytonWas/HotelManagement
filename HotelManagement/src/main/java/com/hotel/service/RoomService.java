@@ -1,14 +1,15 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
 
-import model.Room;
+import com.hotel.model.Room;
 
 public interface RoomService {
 	void addRoom(Room room);
 	Boolean removeRoom(Long roomId);
-	Room updateRoom(Long roomId, Room room);
+	void updateRoom(Long roomId, Room room);
 	List<Room> getAllRooms();
 	Room getRoom(Long roomId);
 	
 }
+

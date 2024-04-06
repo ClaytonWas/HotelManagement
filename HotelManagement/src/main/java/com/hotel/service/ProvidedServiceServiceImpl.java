@@ -1,24 +1,37 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
 
-import model.ProvidedService;
-import repository.ProvidedServiceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.hotel.model.ProvidedService;
+import com.hotel.repository.ProvidedServiceRepository;
+
+@Service
 public class ProvidedServiceServiceImpl implements ProvidedServiceService{
+	private ProvidedServiceRepository serviceRepo;
 	
-	ProvidedServiceRepository serviceRepo;
+	@Autowired
+	public ProvidedServiceServiceImpl(ProvidedServiceRepository serviceRepo) {
+		super();
+		this.serviceRepo = serviceRepo;
+	}
 	
-	public ProvidedService saveService(ProvidedService service) {
+	public void saveService(ProvidedService service) {
 		
 		if(!serviceRepo.existsByNameAndDescription(service.getName(), service.getDescription())) {
 			serviceRepo.save(service);
+			
+			System.out.println(service);
+		}
+		else {
+			System.out.println("Failure to register service");
 		}
 		
-		return service;
+		
 		
 	}
-	
 	public Boolean removeService(Long providedServiceId) {
 		
 		if ((serviceRepo.deleteByProvidedServiceId(providedServiceId)) >= 1) {
@@ -33,7 +46,7 @@ public class ProvidedServiceServiceImpl implements ProvidedServiceService{
 		return serviceRepo.findByProvidedServiceId(providedServiceId);
 	}
 	
-	public ProvidedService updateService(Long providedServiceId, ProvidedService service) {
+	public void updateService(Long providedServiceId, ProvidedService service) {
 		
 		if (serviceRepo.existsById(providedServiceId)) {
 			
@@ -43,12 +56,10 @@ public class ProvidedServiceServiceImpl implements ProvidedServiceService{
 			serviceTU.setDescription(service.getDescription());
 			serviceTU.setPrice(service.getPrice());
 			
-			serviceRepo.save(serviceTU);
-			
-			return serviceTU;
+			System.out.println("Service updated successfully");
 		}
 		
-		return service;
+		System.out.println("Failure to update service");
 	}
 	
 	public List<ProvidedService> getAllServices(){
@@ -56,3 +67,4 @@ public class ProvidedServiceServiceImpl implements ProvidedServiceService{
 	}
 
 }
+

@@ -8,6 +8,8 @@
 </head>
 <body>
     <h1>Bookings</h1>
+    
+<!-- 
     <ul>
         <li th:each="booking : ${bookings}">
             <span th:text="${booking.customer.name}"></span>
@@ -16,11 +18,15 @@
             <span th:text="${booking.endDate}"></span>
         </li>
     </ul>
-    <form action="/addBooking" method="post">
-        <input type="text" name="name" placeholder="Service Name">
+-->
+
+    <form th:action="@{/processAddBooking}" method="post" th:object="${booking}">
+    <!--  
+        <input type="text" name="name" th:field="*{name}" placeholder="Service Name">
         <input type="number" name="roomNumber" placeholder="Room Number">
-        <input type="date" name="startDate" placeholder="Start Date">
-        <input type="date" name="endDate" placeholder="End Date">
+     -->
+        <input type="date" name="startDate" th:field="*{startDate}" placeholder="Start Date">
+        <input type="date" name="endDate" th:field="*{endDate}" placeholder="End Date">
         <button type="submit">Add Booking</button>
     </form>
     <a href="/customers">View Customers</a>

@@ -1,15 +1,22 @@
-package service;
+package com.hotel.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import model.Room;
-import repository.RoomRepository;
+import com.hotel.model.Room;
+import com.hotel.repository.RoomRepository;
 
 @Service
 public class RoomServiceImpl implements RoomService{
-	RoomRepository roomRepo;
+	private RoomRepository roomRepo;
+	
+	@Autowired
+	public RoomServiceImpl(RoomRepository roomRepo) {
+		super();
+		this.roomRepo = roomRepo;
+	}
 	
 	public void addRoom(Room room) {
 		if(!roomRepo.existsByRoomNumberAndType(room.getRoomNumber(), room.getType())) {
@@ -17,11 +24,13 @@ public class RoomServiceImpl implements RoomService{
 			
 			System.out.println(room);
 		}
-		
-		System.out.println("Failure to register room");
-		
+		else {
+			System.out.println("Failure to register room");
+		}
+			
 		//return room;
 	}
+	
 	
 	public Boolean removeRoom(Long roomId) {
 		
@@ -37,7 +46,7 @@ public class RoomServiceImpl implements RoomService{
 		return roomRepo.findByRoomId(roomId);
 	}
 	
-	public Room updateRoom(Long roomId, Room room) {
+	public void updateRoom(Long roomId, Room room) {
 		
 		if (roomRepo.existsById(roomId)) {
 			
@@ -49,10 +58,10 @@ public class RoomServiceImpl implements RoomService{
 			
 			roomRepo.save(roomTU);
 			
-			return roomTU;
+			System.out.println("Room successfully updated");
 		}
 		
-		return room;
+		System.out.println("Failure to update room");
 	}
 	
 	public List<Room> getAllRooms(){

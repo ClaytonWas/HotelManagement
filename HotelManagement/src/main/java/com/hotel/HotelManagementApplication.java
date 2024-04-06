@@ -1,4 +1,4 @@
-package HotelManagementApplication;
+package com.hotel;
 
 
 import org.springframework.boot.SpringApplication;

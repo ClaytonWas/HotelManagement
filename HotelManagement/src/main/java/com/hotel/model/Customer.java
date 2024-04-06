@@ -1,9 +1,10 @@
-package model;
+package com.hotel.model;
 
 //The git file had it labeled in a file called entity might cause problems later 
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -16,7 +17,9 @@ import java.util.Map;
 @Entity
 @Table(name = "CUSTOMER")
 public class Customer {
+	
 	@Id
+	@GeneratedValue
 	@Column(name = "Customer_ID")
 	private long customerId;
 	
@@ -45,6 +48,15 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public Customer(long customerId, String name, String phoneNumber, String email) {
+		super();
+		this.customerId = customerId;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
+
 
 	public Customer(long customerId, String name, byte age, String gender, String phoneNumber, String email, long contact, String city,
 			HashMap<LocalDate, Booking> bookings) {

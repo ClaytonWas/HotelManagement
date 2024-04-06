@@ -1,4 +1,4 @@
-package model;
+package com.hotel.model;
 //idk
 
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -15,6 +16,7 @@ import jakarta.persistence.Table;
 public class Room {
 	
 	@Id
+	@GeneratedValue
 	@Column(name = "Room_ID")
 	private long roomId;
 	
@@ -93,3 +95,4 @@ public class Room {
 	}
 	
 }
+
