@@ -28,21 +28,16 @@ public class BookingController {
 		this.bookingService = bookingService;
 	}
 	
-	@GetMapping("/addBooking")
+	@GetMapping("/bookings")
 	public String addBooking(Model model) {
-		
 		model.addAttribute("booking", new Booking());
-		
-		
 		return "bookings";	
 	}
 	
 	@PostMapping("/processAddBooking")
 	public String processAddBooking(Booking booking, Model model) {
-		
 		bookingService.saveBooking(booking);
-		
-		return "redirect:/addBooking";
+		return "redirect:/bookings";
 	}
 	
 	/*

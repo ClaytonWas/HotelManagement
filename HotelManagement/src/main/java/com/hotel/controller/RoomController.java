@@ -18,7 +18,7 @@ public class RoomController {
 		this.roomService = roomService;
 	}
 	
-	@GetMapping("/addRoom")
+	@GetMapping("/rooms")
 	public String addRoom(Model model) {
 		model.addAttribute("room", new Room());
 		
@@ -27,10 +27,10 @@ public class RoomController {
 	
 	@PostMapping("/processAddRoom")
 	public String proccessAddRoom(Room room, Model model) {
-		
+
 		roomService.addRoom(room);
 		
-		return "redirect:/addRoom";
+		return "redirect:/rooms";
 	}
 	
 }

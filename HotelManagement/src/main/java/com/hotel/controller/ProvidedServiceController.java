@@ -17,7 +17,7 @@ public class ProvidedServiceController {
 		this.providedServiceService = providedServiceService;
 	}
 	
-	@GetMapping("/addService")
+	@GetMapping("/services")
 	public String addService(Model model) {
 		
 		model.addAttribute("service", new ProvidedService());
@@ -30,7 +30,7 @@ public class ProvidedServiceController {
 		
 		providedServiceService.saveService(service);
 		
-		return "redirect:/addService";
+		return "redirect:/services";
 	}
 
 }

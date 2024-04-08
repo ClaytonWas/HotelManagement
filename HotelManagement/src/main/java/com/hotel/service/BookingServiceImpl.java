@@ -22,34 +22,22 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 	public void saveBooking(Booking booking) {
-		
-		if (!bookingRepo.existsByStartDateAndRoomId(booking.getStartDate(), booking.getRoomId())) {
+		if (!bookingRepo.bookingExists(booking.getStartDate(), booking.getRoomId())) {
 			bookingRepo.save(booking);
-			
 			System.out.println(booking);
-		}
-		else {
-			System.out.println("Failure to save booking");
-		}
-		
+		} else System.out.println("Failure to save booking");
 	}
 	
 	public Boolean deleteBooking(Long bookId) {
-		
-		if ((bookingRepo.deleteByBookingId(bookId)) >=1) {
-			return true;
-		}
-		
+		if ((bookingRepo.deleteByBookingId(bookId)) >=1) return true;		
 		return false;
 	}
 	
 	public Booking getBooking(Long bookingId) {
-		
 		return bookingRepo.findByBookingId(bookingId);
 	}
 	
 	public void updateBooking(Long bookingId, Booking booking) {
-		
 		if (bookingRepo.existsById(bookingId)) {
 			
 			Booking bookingTU = getBooking(bookingId);
@@ -63,14 +51,10 @@ public class BookingServiceImpl implements BookingService{
 			
 			System.out.println("Booking successfully updated");
 		}
-		
 		System.out.println("Failure to update booking");
 	}
 	
 	public List<Booking> getAllBookings(){
-		
 		return bookingRepo.findAll();
 	}
-
 }
-

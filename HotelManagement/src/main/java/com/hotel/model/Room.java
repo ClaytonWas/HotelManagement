@@ -1,5 +1,4 @@
 package com.hotel.model;
-//idk
 
 import java.time.LocalDate;
 import java.util.HashMap;

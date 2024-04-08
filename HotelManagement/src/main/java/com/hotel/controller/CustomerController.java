@@ -29,7 +29,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 	
-	@GetMapping("/addCustomer")
+	@GetMapping("/customers")
 	public String addController(Model model) {
 		
 		model.addAttribute("customer", new Customer());
@@ -42,7 +42,7 @@ public class CustomerController {
 		
 		customerService.addCustomer(customer);
 		
-		return "redirect:/addCustomer";
+		return "redirect:/customers";
 	}
 	
 
