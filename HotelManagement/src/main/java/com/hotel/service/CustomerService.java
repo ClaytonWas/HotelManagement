@@ -14,7 +14,6 @@ public class CustomerService {
 	
 	@Autowired
 	public CustomerService(CustomerRepository customerRepo) {
-		super();
 		this.customerRepo = customerRepo;
 	}
 
@@ -23,28 +22,19 @@ public class CustomerService {
 			customerRepo.save(customer);
 			
 			System.out.println(customer);
-		}else {
-			System.out.println("Failure to save customer");
-		}
+		} else System.out.println("Failure to save customer");
 	}
 	
 	public Boolean removeCustomer(Long customerId){
-		
-		if ((customerRepo.deleteByCustomerId(customerId) >= 1)) {
-			return true;
-		}
-		
+		if ((customerRepo.deleteByCustomerId(customerId) >= 1)) return true;
 		return false;
 	}
 	
 	public Customer getCustomer(Long customerId) {
-		
 		return customerRepo.findByCustomerId(customerId);
-		
 	}
 	
 	public void updateCustomer(Long customerId, Customer customer){
-		
 		if(customerRepo.existsById(customerId)){
 			Customer customerTU = getCustomer(customerId);
 			
@@ -55,13 +45,10 @@ public class CustomerService {
 			customerRepo.save(customerTU);
 			
 			System.out.println("Customer successfully updated");
-		}
-		
-		System.out.println("Failure to update customer");
+		} else System.out.println("Failure to update customer");
 	}
 	
 	public List<Customer> getAllCustomers(){
 		return customerRepo.findAll();
 	}
-
 }

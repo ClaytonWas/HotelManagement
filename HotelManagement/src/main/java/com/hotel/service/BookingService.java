@@ -16,7 +16,6 @@ public class BookingService {
 	BookingRepository bookingRepo;
 	
 	public BookingService(BookingRepository bookingRepo) {
-		super();
 		this.bookingRepo = bookingRepo;
 	}
 

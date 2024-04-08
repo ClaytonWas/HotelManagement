@@ -31,15 +31,10 @@ public class Room {
 	@OneToMany(mappedBy = "room")
 	private HashMap<LocalDate, Booking> bookings;
 	
-	public Room() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public Room() {}
 
-	
 	public Room(long roomId, String roomNumber, String type, double price,
 			HashMap<LocalDate, Booking> bookings) {
-		super();
 		this.roomId = roomId;
 		this.roomNumber = roomNumber;
 		this.type = type;
@@ -47,51 +42,19 @@ public class Room {
 		this.bookings = bookings;
 	}
 
-
-	public long getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(long roomId) {
-		this.roomId = roomId;
-	}
-
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	
-	public HashMap<LocalDate, Booking> getBookings() {
-		return bookings;
-	}
-
-	public void setBookings(HashMap<LocalDate, Booking> bookings) {
-		this.bookings = bookings;
-	}
+	public long getRoomId() { return roomId; }
+	public void setRoomId(long roomId) { this.roomId = roomId; }
+	public String getRoomNumber() { return roomNumber; }
+	public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
+	public String getType() { return type; }
+	public void setType(String type) { this.type = type; }
+	public double getPrice() { return price; }
+	public void setPrice(double price) { this.price = price; }
+	public HashMap<LocalDate, Booking> getBookings() { return bookings; }
+	public void setBookings(HashMap<LocalDate, Booking> bookings) { this.bookings = bookings; }
 
 	@Override
 	public String toString() {
 		return "Room [roomNumber=" + roomNumber + ", type=" + type + ", price=" + price + "]";
 	}
-	
 }
-

@@ -14,7 +14,6 @@ public class RoomService {
 	
 	@Autowired
 	public RoomService(RoomRepository roomRepo) {
-		super();
 		this.roomRepo = roomRepo;
 	}
 	
@@ -23,31 +22,19 @@ public class RoomService {
 			roomRepo.save(room);
 			
 			System.out.println(room);
-		}
-		else {
-			System.out.println("Failure to register room");
-		}
-			
-		//return room;
+		} else System.out.println("Failure to register room");
 	}
 	
-	
 	public Boolean removeRoom(Long roomId) {
-		
-		if((roomRepo.deleteByRoomId(roomId)) >= 1) {
-			return true;
-		}
-		
+		if((roomRepo.deleteByRoomId(roomId)) >= 1) return true;		
 		return false;
 	}
 	
 	public Room getRoom(Long roomId) {
-		
 		return roomRepo.findByRoomId(roomId);
 	}
 	
 	public void updateRoom(Long roomId, Room room) {
-		
 		if (roomRepo.existsById(roomId)) {
 			
 			Room roomTU = getRoom(roomId);
@@ -60,12 +47,10 @@ public class RoomService {
 			
 			System.out.println("Room successfully updated");
 		}
-		
 		System.out.println("Failure to update room");
 	}
 	
 	public List<Room> getAllRooms(){
 		return roomRepo.findAll();
 	}
-
 }

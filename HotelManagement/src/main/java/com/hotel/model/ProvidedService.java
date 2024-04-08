@@ -30,65 +30,29 @@ public class ProvidedService {
 	@ManyToMany(mappedBy = "providedServices")
 	private Set<Booking> bookings;
 	
-	public ProvidedService() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public ProvidedService() {}
 
 	public ProvidedService(long providedServiceId, String name, String description, double price) {
-		super();
 		this.providedServiceId = providedServiceId;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 	}
 	
-	
-	public void setProvidedServiceId(long providedServiceId) {
-		this.providedServiceId = providedServiceId;
-	}
-
-	public long getProvidedServiceId() {
-		return providedServiceId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	
-	public Set<Booking> getBookings() {
-		return bookings;
-	}
-
-	public void setBookings(Set<Booking> bookings) {
-		this.bookings = bookings;
-	}
+	public void setProvidedServiceId(long providedServiceId) { this.providedServiceId = providedServiceId; }
+	public long getProvidedServiceId() { return providedServiceId; }
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+	public String getDescription() { return description; }
+	public void setDescription(String description) { this.description = description; }
+	public double getPrice() { return price; }
+	public void setPrice(double price) { this.price = price; }
+	public Set<Booking> getBookings() { return bookings; }
+	public void setBookings(Set<Booking> bookings) { this.bookings = bookings; }
 
 	@Override
 	public String toString() {
 		return "ProvidedService [name=" + name + ", description=" + description + ", price="
 				+ price + "]";
 	}
-	
-	
 }

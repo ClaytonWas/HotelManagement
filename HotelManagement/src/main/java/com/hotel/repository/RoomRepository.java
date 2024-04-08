@@ -10,7 +10,6 @@ import com.hotel.model.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
-    // You can add custom methods here if needed
 	
 	boolean existsByRoomNumberAndType(String roomNumber, String type);
 	
