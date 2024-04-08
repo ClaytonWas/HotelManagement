@@ -11,7 +11,7 @@ import com.hotel.model.Booking;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> { 
 	
-	boolean existsByStartDateAndRoomId(LocalDate startDate, Long roomId);
+	boolean existsByStartDateAndEndDateAndRoomId(LocalDate startDate, LocalDate endDate, Long roomId);
 	
 	@Query("select b from Booking b WHERE b.bookingId = ?1")
 	Booking findByBookingId(Long bookingId);

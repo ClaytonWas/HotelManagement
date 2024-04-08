@@ -2,7 +2,8 @@ package com.hotel.model;
 //idk
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Map;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +31,7 @@ public class Room {
 	private double price;
 	
 	@OneToMany(mappedBy = "room")
-	private HashMap<LocalDate, Booking> bookings;
+	private Map<LocalDate, Booking> bookings;
 	
 	public Room() {
 		super();
@@ -39,7 +40,7 @@ public class Room {
 
 	
 	public Room(long roomId, String roomNumber, String type, double price,
-			HashMap<LocalDate, Booking> bookings) {
+			Map<LocalDate, Booking> bookings) {
 		super();
 		this.roomId = roomId;
 		this.roomNumber = roomNumber;
@@ -81,11 +82,11 @@ public class Room {
 		this.price = price;
 	}
 	
-	public HashMap<LocalDate, Booking> getBookings() {
+	public Map<LocalDate, Booking> getBookings() {
 		return bookings;
 	}
 
-	public void setBookings(HashMap<LocalDate, Booking> bookings) {
+	public void setBookings(Map<LocalDate, Booking> bookings) {
 		this.bookings = bookings;
 	}
 

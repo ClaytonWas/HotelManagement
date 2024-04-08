@@ -1,5 +1,7 @@
 package com.hotel.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,23 @@ public class RoomController {
 		this.roomService = roomService;
 	}
 	
-	@GetMapping("/addRoom")
-	public String addRoom(Model model) {
-		model.addAttribute("room", new Room());
+	@GetMapping("/viewRoom")
+	public String viewRoom(Model model) {
+		
+		List<Room> rooms = roomService.getAllRooms();
+		
+		model.addAttribute("rooms", rooms);
 		
 		return "rooms";
+		
+	}
+	
+	@GetMapping("/addRoom")
+	public String addRoom(Model model) {
+		
+		model.addAttribute("room", new Room());
+		
+		return "createRoom";
 	}
 	
 	@PostMapping("/processAddRoom")
