@@ -11,10 +11,10 @@
  	
  	<form th:action="@{/searchRooms}" method="get">
         <label for="minPrice">Min Price:</label>
-        <input type="number" min="0.00" step="1" id="minPrice" name="minPrice">
+        <input type="number" min="0.00" step="1" id="minPriceStr" name="minPriceStr">
         
         <label for="maxPrice">Max Price:</label>
-        <input type="number" min="0.00" step="1" id="maxPrice" name="maxPrice">
+        <input type="number" min="0.00" step="1" id="maxPriceStr" name="maxPriceStr">
         
         <label for="roomType">Room Type:</label>
         <select id="roomType" name="roomType">

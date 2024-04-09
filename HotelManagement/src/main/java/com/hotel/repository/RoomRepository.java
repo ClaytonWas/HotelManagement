@@ -21,5 +21,19 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	List<Room> findAll();
 	
+	List<Room> searchByPriceGreaterThanEqual(double minPrice);
+	
+	List<Room> searchByPriceGreaterThanEqualAndType(double minPrice, String type);
+	
+	List<Room> searchByPriceLessThanEqual(double maxPrice);
+	
+	List<Room> searchByPriceLessThanEqualAndType(double maxPrice, String type);
+	
+	List<Room> searchByPriceBetween(double minPrice, double maxPrice);
+	
+	List<Room> searchByPriceBetweenAndType(double minPrice, double maxPrice, String type);
+	
+	List<Room> searchByType(String type);
+	
 	
 }

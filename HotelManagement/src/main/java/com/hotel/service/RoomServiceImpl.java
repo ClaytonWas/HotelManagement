@@ -67,5 +67,32 @@ public class RoomServiceImpl implements RoomService{
 	public List<Room> getAllRooms(){
 		return roomRepo.findAll();
 	}
-
+	
+	public List<Room> searchByMinPriceOnly(double minPrice){
+		return roomRepo.searchByPriceGreaterThanEqual(minPrice);
+	}
+	
+	public List<Room> searchByMinPriceAndRoomType(double minPrice, String type){
+		return roomRepo.searchByPriceGreaterThanEqualAndType(minPrice, type);
+	};
+	
+	public List<Room> searchByMaxPriceOnly(double maxPrice){
+		return roomRepo.searchByPriceLessThanEqual(maxPrice);
+	}
+	
+	public List<Room> searchByMaxPriceAndRoomType(double maxPrice, String type){
+		return roomRepo.searchByPriceLessThanEqualAndType(maxPrice, type);
+	};
+	
+	public List<Room> searchByMinPriceAndMaxPrice(double minPrice, double maxPrice){
+		return roomRepo.searchByPriceBetween(minPrice, maxPrice);
+	};
+	
+	public List<Room> searchByMinPriceAndMaxPriceAndType(double minPrice, double maxPrice, String type){
+		return roomRepo.searchByPriceBetweenAndType(minPrice, maxPrice, type);
+	}
+	
+	public List<Room> searchByOnlyType(String type){
+		return roomRepo.searchByType(type);
+	}
 }
