@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>Rooms</h1>
+    <h1 id="pagetitle">Rooms</h1>
+    <!-- Header & Footer -->
+    <header>
+        <nav>
+            <a href="../static/index.html">Home</a>
+            <a href="../templates/rooms.html">View Rooms</a>
+            <a href="../templates/customers.html">View Customers</a>
+            <a href="../templates/bookings.html">View Bookings</a>
+            <a href="../templates/services.html">View Services</a>
+        </nav>
+    </header>
+
+    <footer>
+        <p>CSCI 3230U - Winter 2024</p>
+    </footer>
   
     <form th:action="@{/processAddRoom}" method="post" th:object="${room}">
         <input type="text" name="number" th:field="*{roomNumber}" placeholder="Room Number">
@@ -15,12 +29,6 @@
         <input type="text" name="type" th:field="*{type}" placeholder="Room Type">
         <button type="submit">Add Room</button>
     </form>
-
-
-    <a href="/customers">View Customers</a>
-    <a href="/bookings">View Bookings</a>
-    <a href="/services">View Services</a>
-
 </body>
 </html>
 

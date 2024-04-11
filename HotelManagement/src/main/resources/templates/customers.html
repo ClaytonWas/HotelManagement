@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customers</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>Customers</h1>
+    <h1 id="pagetitle">Customers</h1>
+    <!-- Header & Footer -->
+    <header>
+        <nav>
+            <a href="../static/index.html">Home</a>
+            <a href="../templates/rooms.html">View Rooms</a>
+            <a href="../templates/customers.html">View Customers</a>
+            <a href="../templates/bookings.html">View Bookings</a>
+            <a href="../templates/services.html">View Services</a>
+        </nav>
+    </header>
+
+    <footer>
+        <p>CSCI 3230U - Winter 2024</p>
+    </footer>
     
 <!--  
     <ul>
@@ -24,9 +38,5 @@
         <input type="email" name="email" th:field="*{email}" placeholder="Ex: john.smith@gmail.com">
         <button type="submit">Add Customer</button>
     </form>
-    
-    <a href="/rooms">View Rooms</a>
-    <a href="/bookings">View Bookings</a>
-    <a href="/services">View Services</a>
 </body>
 </html>
