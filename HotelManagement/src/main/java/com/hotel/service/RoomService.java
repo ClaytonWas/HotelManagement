@@ -53,4 +53,9 @@ public class RoomService {
 	public List<Room> getAllRooms(){
 		return roomRepo.findAll();
 	}
+	
+	public List<Room> searchRooms(double min, double max, String type) {
+		if (type == null) return roomRepo.searchByPriceBetween(min, max);
+		return roomRepo.searchByPriceBetweenAndType(min, max, type);
+	}
 }

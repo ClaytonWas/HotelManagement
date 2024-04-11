@@ -5,12 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -55,7 +53,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [name=" + name + ", age=" + age + ", gender=" + gender + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + ", contact=" + contact + ", city=" + city + ", bookings=" + bookings + "]";
+		return "Customer [name=" + name  + ", phoneNumber=" + phoneNumber
+				+ ", email=" + email + ", bookings=" + bookings + "]";
 	}
 }

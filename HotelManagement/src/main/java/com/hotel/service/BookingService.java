@@ -20,7 +20,7 @@ public class BookingService {
 	}
 
 	public void saveBooking(Booking booking) {
-		if (!bookingRepo.existsByStartDateAndRoomId(booking.getStartDate(), booking.getRoomId())) {
+		if (!bookingRepo.existsByStartDateAndEndDateAndRoomId(booking.getStartDate(), booking.getEndDate(), booking.getRoomId())) {
 			bookingRepo.save(booking);
 			System.out.println(booking);
 		} else System.out.println("Failure to save booking");

@@ -1,4 +1,4 @@
-package com.hotel.controller;
+ package com.hotel.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
