@@ -43,8 +43,6 @@ public class RoomController {
             @RequestParam(required = false, value = "maxPriceStr", defaultValue = "") String maxPriceStr, 
             @RequestParam(required  = false, value = "roomType", defaultValue = "") String roomType)
     {
-        //List<Room> rooms = roomService.getAllRooms();
-		
 		double minPrice = 0.0, maxPrice = 1000.0;
         try { if (!minPriceStr.isEmpty()) minPrice = Double.parseDouble(minPriceStr); } 
         catch (NumberFormatException e) { minPrice = 0.0; }
@@ -54,6 +52,7 @@ public class RoomController {
         List<Room> rooms = roomService.searchRooms(minPrice, maxPrice, roomType.isEmpty() ? null : roomType);
         model.addAttribute("rooms", rooms);
                 
-        return "rooms";
+        for (Room i : rooms) System.out.println(i);
+        return "redirect:/rooms";
     }
 }

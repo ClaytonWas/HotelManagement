@@ -21,7 +21,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	int deleteByRoomId(Long roomId);
 	
-	List<Room> findAll();
-	
-	
+	List<Room> findAll();	
 }
