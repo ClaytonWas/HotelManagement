@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.model.Booking;
+import com.hotel.model.Customer;
 import com.hotel.service.BookingService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -33,12 +36,17 @@ public class BookingController {
 		
 		model.addAttribute("booking", new Booking());
 		
-		
 		return "bookings";	
 	}
 	
 	@PostMapping("/processAddBooking")
-	public String processAddBooking(Booking booking, Model model) {
+	public String processAddBooking(Booking booking, HttpSession httpsession) {
+		
+		Customer sessionCustomer = (Customer) httpsession.getAttribute("customer");
+		
+		sessionCustomer.getBookings().add(booking);
+		
+		booking.setCustomerId(sessionCustomer.getCustomerId());
 		
 		bookingService.saveBooking(booking);
 		

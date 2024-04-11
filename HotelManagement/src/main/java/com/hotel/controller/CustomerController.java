@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hotel.model.Customer;
 import com.hotel.service.CustomerService;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 //@RequestMapping("/user")
@@ -38,11 +40,13 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/processAddCustomer")
-	public String processAddCustomer(Customer customer, Model model) {
+	public String processAddCustomer(Customer customer, HttpSession httpSession) {
+		
+		httpSession.setAttribute("customer", customer);
 		
 		customerService.addCustomer(customer);
 		
-		return "redirect:/addCustomer";
+		return "redirect:/addBooking";
 	}
 	
 

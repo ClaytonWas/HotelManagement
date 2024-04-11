@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -40,7 +41,7 @@ public class Customer {
 	private String city;
 	
 	@OneToMany(mappedBy = "customer")
-	private HashMap<LocalDate, Booking> bookings;
+	private Set<Booking> bookings;
 	
 	
 	public Customer() {
@@ -59,7 +60,7 @@ public class Customer {
 
 
 	public Customer(long customerId, String name, byte age, String gender, String phoneNumber, String email, long contact, String city,
-			HashMap<LocalDate, Booking> bookings) {
+			Set<Booking> bookings) {
 		super();
 		this.customerId = customerId;
 		this.name = name;
@@ -143,12 +144,12 @@ public class Customer {
 	}
 
 	
-	public HashMap<LocalDate, Booking> getBookings() {
+	public Set<Booking> getBookings() {
 		return bookings;
 	}
 
 
-	public void setBookings(HashMap<LocalDate, Booking> bookings) {
+	public void setBookings(Set<Booking> bookings) {
 		this.bookings = bookings;
 	}
 
