@@ -22,27 +22,22 @@
     <footer>
         <p>CSCI 3230U - Winter 2024</p>
     </footer>
-    
-<!-- 
-    <ul>
-        <li th:each="booking : ${bookings}">
+
+    <form th:action="@{/processAddBooking}" method="post" th:object="${booking}">
+    	<input type="text" name="name" placeholder="Customer Name">
+        <input type="text" name="type" placeholder="Room Type">
+        <input type="date" name="startDate" placeholder="Start Date">
+        <input type="date" name="endDate" placeholder="End Date">
+        <button type="submit">Add Booking</button>
+    </form>
+<!--    <ul>
+        <li th:each="booking : ${booking}">
             <span th:text="${booking.customer.name}"></span>
             <span th:text="${booking.room.number}"></span>
             <span th:text="${booking.startDate}"></span>
             <span th:text="${booking.endDate}"></span>
         </li>
-    </ul>
+    </ul> 
 -->
-
-    <form th:action="@{/processAddBooking}" method="post" th:object="${booking}">
-    	<input type="text" name="name" placeholder="Customer Name">
-    <!--  
-        <input type="text" name="name" placeholder="Service Name">-->
-        <input type="text" name="type" placeholder="Room Type">
-     
-        <input type="date" name="startDate" placeholder="Start Date">
-        <input type="date" name="endDate" placeholder="End Date">
-        <button type="submit">Add Booking</button>
-    </form>
 </body>
 </html>

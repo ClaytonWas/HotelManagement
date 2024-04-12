@@ -60,7 +60,8 @@ public class Booking {
 		this.endDate = endDate;
 	}
 	
-	public Booking(Room room, LocalDate startDate, LocalDate endDate) {
+	public Booking(Customer customer, Room room, LocalDate startDate, LocalDate endDate) {
+		this.customer = customer;
 		this.room = room;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -81,7 +82,7 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", roomNum=" + (this.room != null ? room.getRoomNumber() : "error, no associated room")
+		return "Booking [CustomerName=" + customer.getName() + ", roomNum=" + (this.room != null ? room.getRoomNumber() : "error, no associated room")
 				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 }

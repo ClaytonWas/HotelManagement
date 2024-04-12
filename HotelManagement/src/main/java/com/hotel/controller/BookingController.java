@@ -27,7 +27,7 @@ public class BookingController {
 	
 	@PostMapping("/processAddBooking")
 	public String processAddBooking(Model model, String name, String type, LocalDate startDate, LocalDate endDate) {
-		bookingService.saveBooking(type, startDate, endDate);
+		bookingService.saveBooking(name, type, startDate, endDate);
 		return "redirect:/bookings";
 	}
 }

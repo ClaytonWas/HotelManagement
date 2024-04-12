@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -29,15 +30,15 @@ public class Customer {
 	private String email;
 	
 	@OneToMany(mappedBy = "customer")
-	private HashMap<LocalDate, Booking> bookings;
+	private Map<LocalDate, Booking> bookings;
 	
 	public Customer() {}
 	
-	public Customer(long customerId, String name, String phoneNumber, String email) {
-		this.customerId = customerId;
+	public Customer(String name, String phoneNumber, String email) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.bookings = new HashMap<LocalDate, Booking>();
 	}
 	
 	public void setCustomerId(long customerId) { this.customerId = customerId; }
@@ -48,12 +49,11 @@ public class Customer {
 	public long getCustomerId() { return customerId; }
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
-	public HashMap<LocalDate, Booking> getBookings() { return bookings; }
-	public void setBookings(HashMap<LocalDate, Booking> bookings) { this.bookings = bookings; }
+	public Map<LocalDate, Booking> getBookings() { return bookings; }
+	public void setBookings(Map<LocalDate, Booking> bookings) { this.bookings = bookings; }
 
 	@Override
 	public String toString() {
-		return "Customer [name=" + name  + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + ", bookings=" + bookings + "]";
+		return "Customer [name=" + name  + ", phoneNumber=" + phoneNumber + ", email=" + email + ", bookings=" + bookings + "]";
 	}
 }

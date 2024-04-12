@@ -18,11 +18,11 @@ public class CustomerService {
 	}
 
 	public void addCustomer(Customer customer) {
-		if(!customerRepo.existsByNameAndPhoneNumber(customer.getName(), customer.getPhoneNumber())) {
+		if(customerRepo.findByName(customer.getName()) == null) {
 			customerRepo.save(customer);
 			
 			System.out.println(customer);
-		} else System.out.println("Failure to save customer");
+		} else System.out.println("Another user already exists with that name.");
 	}
 	
 	public Boolean removeCustomer(Long customerId){
@@ -32,20 +32,6 @@ public class CustomerService {
 	
 	public Customer getCustomer(Long customerId) {
 		return customerRepo.findByCustomerId(customerId);
-	}
-	
-	public void updateCustomer(Long customerId, Customer customer){
-		if(customerRepo.existsById(customerId)){
-			Customer customerTU = getCustomer(customerId);
-			
-			customerTU.setName(customer.getName());
-			customerTU.setPhoneNumber(customer.getPhoneNumber());
-			customerTU.setEmail(customer.getEmail());
-			
-			customerRepo.save(customerTU);
-			
-			System.out.println("Customer successfully updated");
-		} else System.out.println("Failure to update customer");
 	}
 	
 	public List<Customer> getAllCustomers(){

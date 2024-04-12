@@ -11,7 +11,7 @@ import com.hotel.model.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	
-	boolean existsByNameAndPhoneNumber(String name, String phoneNumber);
+	Customer findByName(String name);
 	
 	@Query("select c from Customer c WHERE c.customerId = ?1")
 	Customer findByCustomerId(Long customerId);
@@ -19,6 +19,4 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	int deleteByCustomerId(Long customerId);
 	
 	List<Customer> findAll();
-	
-	
 }
