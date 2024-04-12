@@ -40,9 +40,9 @@ public class RoomController {
 	
 	@GetMapping("/searchRooms")
 	public String searchRooms(Model model, 
-	                          @RequestParam(required = false, value = "minPriceStr", defaultValue = "") String minPriceStr, 
-	                          @RequestParam(required = false, value = "maxPriceStr", defaultValue = "") String maxPriceStr, 
-	                          @RequestParam(required  = false, value = "roomType", defaultValue = "") String roomType) {
+			@RequestParam(required = false, value = "minPriceStr", defaultValue = "") String minPriceStr, 
+	        @RequestParam(required = false, value = "maxPriceStr", defaultValue = "") String maxPriceStr, 
+	        @RequestParam(required  = false, value = "roomType", defaultValue = "") String roomType) {
 	    double minPrice = 0.0, maxPrice = 1000.0;
 	    try { 
 	        if (!minPriceStr.isEmpty()) 
