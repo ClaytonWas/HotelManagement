@@ -1,111 +1,116 @@
 /* Animation */
-@keyframes fade
-{
-  0%{opacity: 0}
-  100%{opacity: 1;}
-  /* 0->1 Opacity Gradient */
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
-
-
 
 /* Global Styles */
 body {
-    font-family: 'Nunito', sans-serif;
-    background-image: url("./oriental.png");
-    /* Source: https://www.toptal.com/designers/subtlepatterns/oriental-pattern/ */
+  font-family: 'Nunito', sans-serif;
+  background-image: url("./oriental.png");
+  /* Source: https://www.toptal.com/designers/subtlepatterns/oriental-pattern/ */
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 h1#pagetitle {
-    color: #7a3970;
-    margin-top: 25px;
-    margin-left: 25px;
-    animation: fade 2s forwards;
+  color: #7a3970;
+  margin-top: 25px;
+  margin-left: 25px;
+  animation: fade 2s forwards;
 }
 
 header {
-    animation: fade 1s forwards;
+  animation: fade 1s forwards;
 }
 
 footer {
-    bottom: 0;
-    position: fixed;
-    text-align: center;
-    width: 100%;
-    color: #2E1C2B;
-    opacity: 0;
-    animation: fade 1s forwards;
-    animation-delay: 1s;
+  bottom: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  color: #2e1c2b;
+  opacity: 0;
+  animation: fade 1s forwards;
+  animation-delay: 1s;
 }
 
 form {
-    margin-top: 100px;
-    margin-left: 100px;
-    padding: 10px;
-    opacity: 0;
-    animation: fade 1s forwards;
-    animation-delay: 0.5s;
+  margin-top: 100px;
+  margin-left: 100px;
+  padding: 10px;
+  opacity: 0;
+  animation: fade 1s forwards;
+  animation-delay: 0.5s;
 }
 
 input {
-    border-radius: 10px;
-    padding: 5px;
-    margin-right: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 10px;
 }
 
 button {
-    border-radius: 5px;
-    padding: 10px;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-
-
-
 /* Navigation */
-nav
-{
+nav {
   height: 25px;
   margin-left: 50px;
   font-weight: bold;
   float: left;
 }
 
-nav a
-{
-  color: #4A1942;
+nav a {
+  color: #4a1942;
   padding: 5px;
   text-decoration: none;
 }
 
-nav a:hover
-{
+nav a:hover {
   color: #893168;
 }
 
-
-
-
-
 /* Form Styles */
 form {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 button {
-    padding: 5px 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #555;
+  background-color: #555;
 }
+
+/* Search Results */
+.search-results-container {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-height: 300px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slide-up 1s ease-out 1s;
+}
+
 
 

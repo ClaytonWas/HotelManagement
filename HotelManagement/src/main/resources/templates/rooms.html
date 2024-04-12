@@ -19,9 +19,7 @@
         </nav>
     </header>
 
-    <footer>
-        <p>CSCI 3230U - Winter 2024</p>
-    </footer>
+    
   
     <form th:action="@{/processAddRoom}" method="post" th:object="${room}">
         <input type="text" name="roomNumber" placeholder="Room Number">
@@ -31,7 +29,7 @@
     </form>
 
     <!-- Display the list of rooms -->
-    <div th:if="${rooms}">
+    <div class="search-results-container" th:if="${rooms}">
         <h2>Search Results:</h2>
         <table>
             <thead>
