@@ -21,7 +21,7 @@ public class BookingController {
 	
 	@GetMapping("/bookings")
 	public String addBooking(Model model) {
-		model.addAttribute("booking", new Booking());
+		model.addAttribute("bookings", bookingService.getAllBookings());
 		return "bookings";	
 	}
 	

@@ -22,21 +22,33 @@
     <footer>
         <p>CSCI 3230U - Winter 2024</p>
     </footer>
-    
-<!--
-    <ul>
-        <li th:each="service : ${services}">
-            <span th:text="${service.name}"></span>
-            <span th:text="${service.price}"></span>
-        </li>
-    </ul>
--->
 
     <form th:action="@{/processAddService}" method="post" th:object="${service}">
-        <input type="text" name="name" th:field="*{name}" placeholder="Service Name">
-        <input type="text" name="description" th:field="*{description}" placeholder="Service Description">
-        <input type="number" min="0.00" step="0.01" name="price" th:field="*{price}" placeholder="Price">
+        <input type="text" name="name" placeholder="Service Name">
+        <input type="text" name="description" placeholder="Service Description">
+        <input type="number" min="0.00" step="0.01" name="price" placeholder="Price">
         <button type="submit">Add Service</button>
     </form>
+    
+    <!-- Display the list of services -->
+    <div th:if="${services}">
+        <h2>Search Results:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="service : ${services}">
+                    <td th:text="${service.name}"></td>
+                    <td th:text="${service.description}"></td>
+                    <td th:text="${service.price}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

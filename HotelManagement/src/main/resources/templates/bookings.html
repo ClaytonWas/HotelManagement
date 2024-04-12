@@ -31,14 +31,28 @@
         <input type="date" name="endDate" placeholder="End Date">
         <button type="submit">Add Booking</button>
     </form>
-<!--    <ul>
-        <li th:each="booking : ${booking}">
-            <span th:text="${booking.customer.name}"></span>
-            <span th:text="${booking.room.number}"></span>
-            <span th:text="${booking.startDate}"></span>
-            <span th:text="${booking.endDate}"></span>
-        </li>
-    </ul> 
--->
+    
+    <!-- Display the list of bookings -->
+    <div th:if="${bookings}">
+        <h2>Search Results:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>StartDate</th>
+                    <th>EndDate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="booking : ${bookings}">
+                    <td th:text="${booking.getCustomer().getName()}"></td>
+                    <td th:text="${booking.getRoom().getType()}"></td>
+                    <td th:text="${booking.startDate}"></td>
+                    <td th:text="${booking.endDate}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
