@@ -34,13 +34,13 @@ public class BookingService {
 		return bookingRepo.findByBookingId(bookingId);
 	}
 	
-	public void updateBooking(Long bookingId, Booking booking) {
+	/*public void updateBooking(Long bookingId, Booking booking) {
 		if (bookingRepo.existsById(bookingId)) {
 			
 			Booking bookingTU = getBooking(bookingId);
 			
-			bookingTU.setCustomerId(booking.getCustomerId());
-			bookingTU.setRoomId(booking.getRoomId());
+			bookingTU.setCustomerId(booking.getCustomer().getCustomerId());
+			bookingTU.setRoomId(booking.getRoom().getRoomId());
 			bookingTU.setStartDate(booking.getStartDate());
 			bookingTU.setEndDate(booking.getEndDate());
 			
@@ -49,7 +49,7 @@ public class BookingService {
 			System.out.println("Booking successfully updated");
 		}
 		System.out.println("Failure to update booking");
-	}
+	}*/
 	
 	public List<Booking> getAllBookings(){
 		return bookingRepo.findAll();
@@ -58,7 +58,7 @@ public class BookingService {
 	public void saveBooking(String type, LocalDate startDate, LocalDate endDate) {
 		List<Room> rooms = roomRepo.searchByType(type);
 		while (rooms.size() != 0) {
-			if (!bookingRepo.existsByStartDateAndEndDateAndRoomId(startDate, endDate, rooms.get(0).getRoomId())) {
+			if (!bookingRepo.existsByStartDateAndEndDateAndRoom(startDate, endDate, rooms.get(0))) {
 				Booking booking = new Booking(rooms.get(0), startDate, endDate);
 				bookingRepo.save(booking);
 				System.out.println(booking);

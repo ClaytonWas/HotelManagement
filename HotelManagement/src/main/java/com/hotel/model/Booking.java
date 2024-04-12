@@ -26,12 +26,6 @@ public class Booking {
 	@Column(name = "Booking_ID")
 	private Long bookingId;
 	
-	@Column(name = "customer_ID")
-	private long customerId;
-	
-	@Column(name = "room_ID")
-	private long roomId;
-	
 	@Column(name = "start_date")
 	private LocalDate startDate;
 	
@@ -72,10 +66,6 @@ public class Booking {
 		this.endDate = endDate;
 	}
 
-	public long getCustomerId() { return customerId; }
-	public void setCustomerId(long customerId) { this.customerId = customerId; }
-	public long getRoomId() { return roomId; }
-	public void setRoomId(long roomId) { this.roomId = roomId; }
 	public LocalDate getStartDate() { return startDate; }
 	public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 	public LocalDate getEndDate() { return endDate; }
