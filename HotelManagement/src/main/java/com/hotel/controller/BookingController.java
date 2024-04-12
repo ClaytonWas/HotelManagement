@@ -1,11 +1,14 @@
  package com.hotel.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hotel.model.Booking;
+import com.hotel.model.Room;
 import com.hotel.service.BookingService;
 
 @Controller
@@ -23,8 +26,8 @@ public class BookingController {
 	}
 	
 	@PostMapping("/processAddBooking")
-	public String processAddBooking(Booking booking, Model model) {
-		bookingService.saveBooking(booking);
+	public String processAddBooking(Model model, String name, String type, LocalDate startDate, LocalDate endDate) {
+		bookingService.saveBooking(type, startDate, endDate);
 		return "redirect:/bookings";
 	}
 }

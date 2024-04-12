@@ -3,6 +3,10 @@ package com.hotel.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.hotel.repository.RoomRepository;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -54,29 +58,19 @@ public class Booking {
 	
 	public Booking() {}
 		
-	public Booking(Long bookingId, long customerId, long roomId, LocalDate startDate, LocalDate endDate) {
-		super();
+	public Booking(Long bookingId, Customer customer, Room room, LocalDate startDate, LocalDate endDate) {
 		this.bookingId = bookingId;
-		this.customerId = customerId;
-		this.roomId = roomId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-	}
-
-	public Booking(Long bookingId, String guestName, long customerId, long roomId, LocalDate startDate,
-			LocalDate endDate, String guestIdProof, String address, long contact, int price, Customer customer,
-			Room room, Set<ProvidedService> providedServices) {
-		super();
-		this.bookingId = bookingId;
-		this.customerId = customerId;
-		this.roomId = roomId;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.customer = customer;
 		this.room = room;
-		this.providedServices = providedServices;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
-
+	
+	public Booking(Room room, LocalDate startDate, LocalDate endDate) {
+		this.room = room;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
 
 	public long getCustomerId() { return customerId; }
 	public void setCustomerId(long customerId) { this.customerId = customerId; }
@@ -97,7 +91,7 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", roomId=" + roomId + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+		return "Booking [bookingId=" + bookingId + ", roomNum=" + (this.room != null ? room.getRoomNumber() : "error, no associated room")
+				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 }

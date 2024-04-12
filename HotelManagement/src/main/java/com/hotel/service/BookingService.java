@@ -1,13 +1,15 @@
 package com.hotel.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hotel.model.Booking;
-
+import com.hotel.model.Room;
 import com.hotel.repository.BookingRepository;
+import com.hotel.repository.RoomRepository;
 
 @Service
 public class BookingService {
@@ -15,15 +17,12 @@ public class BookingService {
 	@Autowired
 	BookingRepository bookingRepo;
 	
-	public BookingService(BookingRepository bookingRepo) {
+	@Autowired
+	RoomRepository roomRepo;
+	
+	public BookingService(BookingRepository bookingRepo, RoomRepository roomRepo) {
 		this.bookingRepo = bookingRepo;
-	}
-
-	public void saveBooking(Booking booking) {
-		if (!bookingRepo.existsByStartDateAndEndDateAndRoomId(booking.getStartDate(), booking.getEndDate(), booking.getRoomId())) {
-			bookingRepo.save(booking);
-			System.out.println(booking);
-		} else System.out.println("Failure to save booking");
+		this.roomRepo = roomRepo;
 	}
 	
 	public Boolean deleteBooking(Long bookId) {
@@ -54,5 +53,18 @@ public class BookingService {
 	
 	public List<Booking> getAllBookings(){
 		return bookingRepo.findAll();
+	}
+	
+	public void saveBooking(String type, LocalDate startDate, LocalDate endDate) {
+		List<Room> rooms = roomRepo.searchByType(type);
+		while (rooms.size() != 0) {
+			if (!bookingRepo.existsByStartDateAndEndDateAndRoomId(startDate, endDate, rooms.get(0).getRoomId())) {
+				Booking booking = new Booking(rooms.get(0), startDate, endDate);
+				bookingRepo.save(booking);
+				System.out.println(booking);
+				return;
+			} else rooms.remove(0);
+		}
+		System.out.println("No available rooms for that type and date.");
 	}
 }

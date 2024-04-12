@@ -13,6 +13,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	boolean existsByRoomNumberAndType(String roomNumber, String type);
 	
+	List<Room> searchByType(String type);
+	
 	List<Room> searchByPriceBetween(double min, double max);
 	List<Room> searchByPriceBetweenAndType(double min, double max, String type);
 	
