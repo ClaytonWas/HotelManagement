@@ -22,21 +22,33 @@
     <footer>
         <p>CSCI 3230U - Winter 2024</p>
     </footer>
-    
-<!--  
-    <ul>
-        <li th:each="customer : ${customers}">
-            <span th:text="${customer.name}"></span>
-            <span th:text="${customer.email}"></span>
-        </li>
-    </ul>
--->
 	
     <form th:action="@{/processAddCustomer}" method="post" th:object="${customer}">
-        <input type="text" name="name"  th:field="*{name}" placeholder="Name">
-        <input type="tel" name="phoneNumber" th:field="*{phoneNumber}" placeholder = "Ex: 647-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-        <input type="email" name="email" th:field="*{email}" placeholder="Ex: john.smith@gmail.com">
+        <input type="text" name="name" placeholder="Name">
+        <input type="tel" name="phoneNumber" placeholder = "Ex: 647-123-4567" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <input type="email" name="email" placeholder="Ex: john.smith@gmail.com">
         <button type="submit">Add Customer</button>
     </form>
+    
+    <!-- Display the list of customers -->
+    <div th:if="${customers}">
+        <h2>Search Results:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.phoneNumber}"></td>
+                    <td th:text="${customer.email}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

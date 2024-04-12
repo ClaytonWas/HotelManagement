@@ -22,8 +22,7 @@ public class RoomController {
 	
 	@GetMapping("/rooms")
 	public String addRoom(Model model) {
-		List<Room> rooms = roomService.searchRooms(0, Double.MAX_VALUE, null);
-	    model.addAttribute("rooms", rooms);
+	    model.addAttribute("rooms", roomService.searchRooms(0, Double.MAX_VALUE, null));
 		return "rooms";
 	}
 	

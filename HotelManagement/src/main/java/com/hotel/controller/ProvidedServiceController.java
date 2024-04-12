@@ -18,7 +18,7 @@ public class ProvidedServiceController {
 	
 	@GetMapping("/services")
 	public String addService(Model model) {
-		model.addAttribute("service", new ProvidedService());
+		model.addAttribute("services", providedServiceService.getAllServices());
 		return "services";
 	}
 	
