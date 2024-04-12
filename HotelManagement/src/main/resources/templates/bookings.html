@@ -26,6 +26,7 @@
     <form th:action="@{/processAddBooking}" method="post" th:object="${booking}">
     	<input type="text" name="name" placeholder="Customer Name">
         <input type="text" name="type" placeholder="Room Type">
+        <input type="text" name="service" placeholder="Requested Services">
         <input type="date" name="startDate" placeholder="Start Date">
         <input type="date" name="endDate" placeholder="End Date">
         <button type="submit">Add Booking</button>

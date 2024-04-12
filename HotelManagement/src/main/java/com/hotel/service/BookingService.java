@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.hotel.model.Booking;
 import com.hotel.model.Customer;
+import com.hotel.model.ProvidedService;
 import com.hotel.model.Room;
 import com.hotel.repository.BookingRepository;
 import com.hotel.repository.CustomerRepository;
+import com.hotel.repository.ProvidedServiceRepository;
 import com.hotel.repository.RoomRepository;
 
 @Service
@@ -25,10 +27,10 @@ public class BookingService {
 	@Autowired
 	CustomerRepository customerRepo;
 	
-	public BookingService(BookingRepository bookingRepo, RoomRepository roomRepo) {
-		this.bookingRepo = bookingRepo;
-		this.roomRepo = roomRepo;
-	}
+	@Autowired
+	ProvidedServiceRepository serviceRepo;
+	
+	public BookingService() {}
 	
 	public Boolean deleteBooking(Long bookId) {
 		if ((bookingRepo.deleteByBookingId(bookId)) >=1) return true;		
@@ -43,7 +45,7 @@ public class BookingService {
 		return bookingRepo.findAll();
 	}
 	
-	public void saveBooking(String name, String type, LocalDate startDate, LocalDate endDate) {
+	public void saveBooking(String name, String type, String service, LocalDate startDate, LocalDate endDate) {
 		List<Room> rooms = roomRepo.searchByType(type);
 		Customer customer = customerRepo.findByName(name);
 		if (customer == null) {
@@ -57,6 +59,11 @@ public class BookingService {
 		while (rooms.size() != 0) {
 			if (!bookingRepo.existsByStartDateAndEndDateAndRoom(startDate, endDate, rooms.get(0))) {
 				Booking booking = new Booking(customer, rooms.get(0), startDate, endDate);
+				
+				ProvidedService service2 = serviceRepo.findByName(service);
+				if (service2 == null) System.out.println("Couldn't find the requested service, proceeding without it.");
+				else booking.addService(service2);
+				
 				bookingRepo.save(booking);
 				System.out.println(booking);
 				return;

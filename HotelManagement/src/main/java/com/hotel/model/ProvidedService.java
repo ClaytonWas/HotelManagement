@@ -32,8 +32,7 @@ public class ProvidedService {
 	
 	public ProvidedService() {}
 
-	public ProvidedService(long providedServiceId, String name, String description, double price) {
-		this.providedServiceId = providedServiceId;
+	public ProvidedService(String name, String description, double price) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -52,7 +51,6 @@ public class ProvidedService {
 
 	@Override
 	public String toString() {
-		return "ProvidedService [name=" + name + ", description=" + description + ", price="
-				+ price + "]";
+		return "ProvidedService [name=" + name + ", description=" + description + ", price=" + price + "]";
 	}
 }

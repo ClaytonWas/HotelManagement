@@ -11,7 +11,7 @@ import com.hotel.model.ProvidedService;
 @Repository
 public interface ProvidedServiceRepository extends JpaRepository<ProvidedService, Long> {
 	
-	boolean existsByNameAndDescription(String name, String description);
+	ProvidedService findByName(String name);
 	
 	@Query("select s from ProvidedService s WHERE s.providedServiceId = ?1")
 	ProvidedService findByProvidedServiceId(Long providedServiceId);
@@ -19,5 +19,4 @@ public interface ProvidedServiceRepository extends JpaRepository<ProvidedService
 	int deleteByProvidedServiceId(Long providedServiceId);
 	
 	List<ProvidedService> findAll();
-
 }

@@ -18,10 +18,10 @@ public class ProvidedServiceService {
 	}
 	
 	public void saveService(ProvidedService service) {
-		if(!serviceRepo.existsByNameAndDescription(service.getName(), service.getDescription())) {
+		if(serviceRepo.findByName(service.getName()) == null) {
 			serviceRepo.save(service);
 			System.out.println(service);
-		} else System.out.println("Failure to register service");		
+		} else System.out.println("A service already exists with this name.");		
 	}
 	
 	public Boolean removeService(Long providedServiceId) {

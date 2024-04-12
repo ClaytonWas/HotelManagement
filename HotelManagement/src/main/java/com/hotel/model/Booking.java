@@ -1,6 +1,7 @@
 package com.hotel.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class Booking {
 	private Room room;
 	
 	@ManyToMany
-	@JoinTable(name = "services_in_booking",
+	@JoinTable(name = "providedServices",
 			joinColumns = {
 					@JoinColumn(name = "Booking_Id", referencedColumnName = "Booking_ID",
 							nullable = false, updatable = false, insertable = false)},
@@ -51,20 +52,13 @@ public class Booking {
 	private Set<ProvidedService> providedServices;
 	
 	public Booking() {}
-		
-	public Booking(Long bookingId, Customer customer, Room room, LocalDate startDate, LocalDate endDate) {
-		this.bookingId = bookingId;
-		this.customer = customer;
-		this.room = room;
-		this.startDate = startDate;
-		this.endDate = endDate;
-	}
 	
 	public Booking(Customer customer, Room room, LocalDate startDate, LocalDate endDate) {
 		this.customer = customer;
 		this.room = room;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.providedServices = new HashSet<ProvidedService>();
 	}
 
 	public LocalDate getStartDate() { return startDate; }
@@ -79,10 +73,11 @@ public class Booking {
 	public void setRoom(Room room) { this.room = room; }
 	public Set<ProvidedService> getProvidedServices() { return providedServices; }
 	public void setProvidedServices(Set<ProvidedService> providedServices) { this.providedServices = providedServices; }
-
+	public void addService(ProvidedService service) { this.providedServices.add(service); }
+	
 	@Override
 	public String toString() {
 		return "Booking [CustomerName=" + customer.getName() + ", roomNum=" + (this.room != null ? room.getRoomNumber() : "error, no associated room")
-				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ ", startDate=" + startDate + ", endDate=" + endDate + "] Services: " + providedServices;
 	}
 }
