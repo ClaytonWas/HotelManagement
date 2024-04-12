@@ -46,15 +46,13 @@ public class RoomServiceImpl implements RoomService{
 		return roomRepo.findByRoomId(roomId);
 	}
 	
-	public void updateRoom(Long roomId, Room room) {
+	public void updateRoom(Long roomId, Room roomUpdated) {
 		
 		if (roomRepo.existsById(roomId)) {
 			
 			Room roomTU = getRoom(roomId);
 			
-			roomTU.setRoomNumber(room.getRoomNumber());
-			roomTU.setType(room.getType());
-			roomTU.setPrice(room.getPrice());
+			roomTU.setBookings(roomUpdated.getBookings());
 			
 			roomRepo.save(roomTU);
 			

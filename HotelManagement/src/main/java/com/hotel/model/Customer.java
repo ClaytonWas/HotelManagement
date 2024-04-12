@@ -1,9 +1,12 @@
 package com.hotel.model;
 
+import jakarta.persistence.CascadeType;
+
 //The git file had it labeled in a file called entity might cause problems later 
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -11,7 +14,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,15 +45,15 @@ public class Customer {
 	private long contact;
 	private String city;
 	
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customerId",  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Booking> bookings;
 	
 	
 	public Customer() {
 		super();
+		this.bookings = new HashSet<Booking>();
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 	public Customer(long customerId, String name, String phoneNumber, String email) {
 		super();
@@ -57,22 +62,6 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
-
-
-	public Customer(long customerId, String name, byte age, String gender, String phoneNumber, String email, long contact, String city,
-			Set<Booking> bookings) {
-		super();
-		this.customerId = customerId;
-		this.name = name;
-		this.age = age;
-		this.gender = gender;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.contact = contact;
-		this.city = city;
-		this.bookings = bookings;
-	}
-
 	
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
@@ -156,9 +145,9 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [name=" + name + ", age=" + age + ", gender=" + gender + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + ", contact=" + contact + ", city=" + city + ", bookings=" + bookings + "]";
+		return "Customer [customerId=" + customerId + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email="
+				+ email + ", bookings=" + bookings + "]";
 	}
-	
+
 	
 }

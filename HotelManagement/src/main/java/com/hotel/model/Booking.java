@@ -2,12 +2,16 @@ package com.hotel.model;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.HashSet;
+
+import jakarta.persistence.CascadeType;
 
 //The git file had it labeled in a file called entity might cause problems later 
 
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -28,11 +32,11 @@ public class Booking {
 	@Column(name="guest_name")
 	private String guestName;
 	
-	@Column(name = "customer_ID")
-	private long customerId;
+	//@Column(name = "customerId_ID")
+	//private long customerIdId;
 	
-	@Column(name = "room_ID")
-	private long roomId;
+	//@Column(name = "room_ID")
+	//private long roomId;
 	
 	@Column(name = "start_date")
 	private LocalDate startDate;
@@ -54,15 +58,15 @@ public class Booking {
 	@Column(name="room_price")
 	private int price;
 	
-	@ManyToOne
-	@JoinColumn(name = "customer")
-	private Customer customer;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Customer_ID")
+	private Customer customerId;
 	
-	@ManyToOne
-	@JoinColumn(name = "room")
-	private Room room;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "Room_ID")
+	private Room roomId;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "services_in_booking",
 			joinColumns = {
 					@JoinColumn(name = "Booking_Id", referencedColumnName = "Booking_ID",
@@ -74,52 +78,31 @@ public class Booking {
 	
 	public Booking() {
 		super();
+		this.providedServices = new HashSet<ProvidedService>();
 		// TODO Auto-generated constructor stub
 	}
 		
-	public Booking(Long bookingId, long customerId, long roomId, LocalDate startDate, LocalDate endDate) {
+	public Booking(LocalDate startDate, LocalDate endDate) {
 		super();
-		this.bookingId = bookingId;
-		this.customerId = customerId;
-		this.roomId = roomId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
-	public Booking(Long bookingId, String guestName, long customerId, long roomId, LocalDate startDate,
-			LocalDate endDate, String guestIdProof, String address, long contact, int price, Customer customer,
-			Room room, Set<ProvidedService> providedServices) {
+	public Booking(Long bookingId, String guestName, LocalDate startDate,
+			LocalDate endDate, String guestIdProof, String address, long contact, int price, Customer customerId,
+			Room roomId, Set<ProvidedService> providedServices) {
 		super();
 		this.bookingId = bookingId;
 		this.guestName = guestName;
-		this.customerId = customerId;
-		this.roomId = roomId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.guestIdProof = guestIdProof;
 		this.address = address;
 		this.contact = contact;
 		this.price = price;
-		this.customer = customer;
-		this.room = room;
-		this.providedServices = providedServices;
-	}
-
-
-	public long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
-	}
-
-	public long getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(long roomId) {
 		this.roomId = roomId;
+		this.providedServices = providedServices;
 	}
 
 	public LocalDate getStartDate() {
@@ -186,22 +169,22 @@ public class Booking {
 		this.price = price;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Customer getcustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setcustomerId(Customer customerId) {
+		this.customerId = customerId;
 	}
 	
 	
-	public Room getRoom() {
-		return room;
+	public Room getRoomId() {
+		return roomId;
 	}
 
 
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setRoom(Room roomId) {
+		this.roomId = roomId;
 	}
 	
 	
@@ -217,8 +200,7 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", roomId=" + roomId + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+		return "Booking [bookingId=" + bookingId + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 
 }

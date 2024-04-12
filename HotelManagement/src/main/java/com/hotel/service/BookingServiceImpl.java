@@ -23,7 +23,7 @@ public class BookingServiceImpl implements BookingService{
 
 	public void saveBooking(Booking booking) {
 		
-		if (!bookingRepo.existsByStartDateAndEndDateAndRoomId(booking.getStartDate(), booking.getEndDate(), booking.getRoomId())) {
+		if (!bookingRepo.existsByStartDateAndEndDateAndCustomerId(booking.getStartDate(), booking.getEndDate(), booking.getcustomerId())) {
 			bookingRepo.save(booking);
 			
 			System.out.println(booking);
@@ -53,9 +53,6 @@ public class BookingServiceImpl implements BookingService{
 		if (bookingRepo.existsById(bookingId)) {
 			
 			Booking bookingTU = getBooking(bookingId);
-			
-			bookingTU.setCustomerId(booking.getCustomerId());
-			bookingTU.setRoomId(booking.getRoomId());
 			bookingTU.setStartDate(booking.getStartDate());
 			bookingTU.setEndDate(booking.getEndDate());
 			

@@ -18,14 +18,24 @@
     </ul>
 -->
 
-    <form th:action="@{/processAddService}" method="post" th:object="${service}">
-        <input type="text" name="name" th:field="*{name}" placeholder="Service Name">
-        <input type="text" name="description" th:field="*{description}" placeholder="Service Description">
-        <input type="number" min="0.00" step="0.01" name="price" th:field="*{price}" placeholder="Price">
-        <button type="submit">Add Service</button>
-    </form>
+    <form th:action="@{/submitServices}" method="get">
+    <ul>
+        <li th:each="service : ${services}">
+            <input type="checkbox" th:id="'service_' + ${service.providedServiceId}" th:name="'selectedServices'" th:value="${service.providedServiceId}"/>
+            <label th:for="'service_' + ${service.providedServiceId}">
+                <span th:text="${service.name}"></span>
+                <span th:text="${service.description}"></span>
+                <span th:text="${service.price}"></span>
+            </label>
+        </li>
+    </ul>
+    <button type="submit">Submit</button>
+	</form>
+    
+<!--
     <a href="/customers">View Customers</a>
     <a href="/rooms">View Rooms</a>
     <a href="/bookings">View Bookings</a>
+-->
 </body>
 </html>

@@ -29,9 +29,13 @@
  	
  	<ul>
         <li th:each="room : ${rooms}">
-            <span th:text="${room.roomNumber}"></span>
-            <span th:text="${room.type}"></span>
-            <span th:text="${room.price}"></span>
+	         <form method="get" th:action="@{/bookRoom}">
+	         	<input type="hidden" name="roomId" th:value="${room.roomId}"/>
+	            <span th:text="${room.roomNumber}"></span>
+	            <span th:text="${room.type}"></span>
+	            <span th:text="${room.price}"></span>
+	            <button type="submit">Book</button>
+	        </form>
         </li>
     </ul>
     

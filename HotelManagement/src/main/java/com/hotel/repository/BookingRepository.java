@@ -7,11 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hotel.model.Booking;
+import com.hotel.model.Customer;
+import com.hotel.model.Room;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> { 
 	
-	boolean existsByStartDateAndEndDateAndRoomId(LocalDate startDate, LocalDate endDate, Long roomId);
+	boolean existsByStartDateAndEndDateAndCustomerId(LocalDate startDate, LocalDate endDate, Customer roomId);
 	
 	@Query("select b from Booking b WHERE b.bookingId = ?1")
 	Booking findByBookingId(Long bookingId);

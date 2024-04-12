@@ -42,9 +42,14 @@ public class CustomerController {
 	@PostMapping("/processAddCustomer")
 	public String processAddCustomer(Customer customer, HttpSession httpSession) {
 		
+		//Persist the Customer in the database
+		customerService.addCustomer(customer);
+		
+		//Add a session attribute for the customer
 		httpSession.setAttribute("customer", customer);
 		
-		customerService.addCustomer(customer);
+		//Add a session attribute for the customerId
+		httpSession.setAttribute("customerId", customer.getCustomerId());
 		
 		return "redirect:/addBooking";
 	}

@@ -1,12 +1,18 @@
 package com.hotel.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hotel.model.Booking;
 import com.hotel.model.ProvidedService;
 import com.hotel.service.ProvidedServiceService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProvidedServiceController {
@@ -17,12 +23,45 @@ public class ProvidedServiceController {
 		this.providedServiceService = providedServiceService;
 	}
 	
+	
+	@GetMapping("/viewService")
+	public String viewService(Model model) {
+		
+		List<ProvidedService> services = providedServiceService.getAllServices();
+		
+		model.addAttribute("services", services);
+		
+		return "services";
+	}
+	
 	@GetMapping("/addService")
 	public String addService(Model model) {
 		
 		model.addAttribute("service", new ProvidedService());
 		
-		return "services";
+		return "createService";
+	}
+	
+	@GetMapping("/submitServices")
+	public String sumbitServices(@RequestParam(value = "selectedServices") List<Long> selectedServices, HttpSession httpSession)
+	{
+		Booking sessionBooking = (Booking) httpSession.getAttribute("booking");
+		
+		for (long serviceId: selectedServices)
+		{
+			ProvidedService selectedService = providedServiceService.getService(serviceId);
+			
+			sessionBooking.getProvidedServices().add(selectedService);
+			
+			selectedService.getBookings().add(sessionBooking);
+			
+			//Add a session attribute for the most recent serviceId
+			httpSession.setAttribute("serviceId", serviceId);
+		}
+		
+		System.out.println(sessionBooking.getProvidedServices());
+		
+		return "redirect:/viewDetails";
 	}
 	
 	@PostMapping("/processAddService")
@@ -32,6 +71,7 @@ public class ProvidedServiceController {
 		
 		return "redirect:/addService";
 	}
+	
 
 }
 

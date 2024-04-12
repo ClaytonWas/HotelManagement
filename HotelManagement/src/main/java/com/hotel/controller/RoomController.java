@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hotel.model.Booking;
 import com.hotel.model.Room;
+import com.hotel.service.BookingService;
 import com.hotel.service.RoomService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class RoomController {
@@ -38,6 +42,30 @@ public class RoomController {
 		model.addAttribute("room", new Room());
 		
 		return "createRoom";
+	}
+	
+	@GetMapping("/bookRoom")
+	public String bookRoom(@RequestParam(value = "roomId") long roomId, HttpSession httpSession)
+	{
+		Booking sessionBooking = (Booking) httpSession.getAttribute("booking");
+		
+		//Add a session attribute for the roomId
+		httpSession.setAttribute("roomId", roomId);
+		
+		Room bookedRoom = roomService.getRoom(roomId);
+		
+		bookedRoom.getBookings().put(sessionBooking.getStartDate(), sessionBooking);
+		
+		roomService.updateRoom(roomId, bookedRoom);
+		
+		sessionBooking.setRoom(bookedRoom);
+		
+		System.out.println(bookedRoom);
+		
+		System.out.println(sessionBooking);
+		
+		return "redirect:/viewService";
+		
 	}
 	
 	@PostMapping("/processAddRoom")

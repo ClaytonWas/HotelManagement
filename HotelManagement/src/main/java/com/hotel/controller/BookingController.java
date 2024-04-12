@@ -40,17 +40,26 @@ public class BookingController {
 	}
 	
 	@PostMapping("/processAddBooking")
-	public String processAddBooking(Booking booking, HttpSession httpsession) {
+	public String processAddBooking(Booking booking, HttpSession httpSession) {
 		
-		Customer sessionCustomer = (Customer) httpsession.getAttribute("customer");
+		Customer sessionCustomer = (Customer) httpSession.getAttribute("customer");
 		
 		sessionCustomer.getBookings().add(booking);
-		
-		booking.setCustomerId(sessionCustomer.getCustomerId());
+			
+		booking.setcustomerId(sessionCustomer);
 		
 		bookingService.saveBooking(booking);
 		
-		return "redirect:/addBooking";
+		httpSession.setAttribute("booking", booking);
+		
+		//Add a session attribute for the bookingId
+		httpSession.setAttribute("bookingId", booking.getBookingId());
+		
+		System.out.println(sessionCustomer);
+		
+		System.out.println(booking.getcustomerId());
+
+		return "redirect:/viewRoom";
 	}
 	
 	/*
