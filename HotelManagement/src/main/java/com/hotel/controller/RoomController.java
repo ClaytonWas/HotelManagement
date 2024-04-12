@@ -22,7 +22,8 @@ public class RoomController {
 	
 	@GetMapping("/rooms")
 	public String addRoom(Model model) {
-		model.addAttribute("room", new Room());
+		List<Room> rooms = roomService.searchRooms(0, Double.MAX_VALUE, null);
+	    model.addAttribute("rooms", rooms);
 		return "rooms";
 	}
 	
@@ -45,20 +46,16 @@ public class RoomController {
 	        @RequestParam(required  = false, value = "roomType", defaultValue = "") String roomType) {
 	    double minPrice = 0.0, maxPrice = 1000.0;
 	    try { 
-	        if (!minPriceStr.isEmpty()) 
-	            minPrice = Double.parseDouble(minPriceStr); 
-	    } catch (NumberFormatException e) { 
-	        minPrice = 0.0; 
-	    }
+	        if (!minPriceStr.isEmpty()) minPrice = Double.parseDouble(minPriceStr); 
+	    } catch (NumberFormatException e) { minPrice = 0.0; }
 	    try { 
-	        if (!maxPriceStr.isEmpty()) 
-	            maxPrice = Double.parseDouble(maxPriceStr); 
-	    } catch (NumberFormatException e)  { 
-	        maxPrice = 0.0; 
-	    }
+	        if (!maxPriceStr.isEmpty()) maxPrice = Double.parseDouble(maxPriceStr); 
+	    } catch (NumberFormatException e)  { maxPrice = 1000.0; }
 	        
 	    List<Room> rooms = roomService.searchRooms(minPrice, maxPrice, roomType.isEmpty() ? null : roomType);
 	    model.addAttribute("rooms", rooms);
+	    
+	    for (Room i : rooms) System.out.println(i);
 	            
 	    return "rooms"; // Return the rooms.html template directly
 	}
